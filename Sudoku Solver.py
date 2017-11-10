@@ -71,8 +71,7 @@ def checkSq(n, i, j):
             return True
 
 
-
-print(checkSq(7,3,0))
+##print(checkSq(3, 3,0))
 
 
 def my_mainloop():
