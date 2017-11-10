@@ -71,6 +71,7 @@ def checkSq(n, i, j):
             return True
 
 
+
 print(checkSq(7,3,0))
 
 
