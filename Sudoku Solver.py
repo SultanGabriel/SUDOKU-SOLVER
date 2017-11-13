@@ -1,7 +1,7 @@
+from copy import deepcopy
 from tkinter import *
 from vars import *
-from copy import deepcopy
-
+from pprint import pprint
 master = Tk()
 c = Canvas(master, height=HEIGHT, width=WIDTH)
 c.pack()
@@ -29,7 +29,7 @@ def drawNum():
 
 
 def draw():
-    # c.delete("all")
+    c.delete("all")
     drawGrid()
     drawNum()
 
@@ -68,76 +68,49 @@ def check(n, x, y):
     return False
 
 
-def nums():
-    for y in range(9):
-        for x in range(9):
-            for n in range(1, 10):
-                if OSdk[y][x] == 0 and check(n, x, y):
-                    Sdk[y][x] = n
-                    break
+def getEMN(x, y):  # getEveryMatchingNumber
+    nms = []
+    for n in range(1, 10):
+        if check(n, x, y):
+            nms.append(n)
+    return nms
 
 
-whiteSp = []
-
-
-def backtrack():
+def checkEN():
+    nums = [[[0] for j in range(9)] for i in range(9)]
     for y in range(9):
         for x in range(9):
             if Sdk[y][x] == 0:
-                whiteSp.append((y, x))
-                c.create_oval(x * 50 + 2, y * 50 + 2, x * 50 + 48, y * 50 + 48)
-
-    while len(whiteSp) != 0:
-        for idx in range(len(whiteSp)):
-            x = whiteSp[idx][0]
-            y = whiteSp[idx][1]
-            rowN = []
-            colN = []
-            sqN = []
-
-            for n in range(9):
-                if checkRow(n, x, y):
-                    rowN.append(n)
-
-                if checkCol(n, x, y):
-                    colN.append(n)
-
-                if checkSq(n, x, y):
-                    sqN.append(n)
-
-            while True:
-                #iRow = 0
-                #iCol = 0
-                #iSq = 0
-
-                # TODO find a way to iterate through all possible combinations
-                for iRow in len(rowN):
-                    for iCol in len(colN):
-                        for iSq in len(sqN):
-
-                            if rowN[iRow] == colN[iCol] and colN[iCol] == sqN[iSq]:
-                                Sdk[x][y] = rowN[iRow]
-                                break
-
-                            if rowN[iRow] == colN[iCol]:
-                                Sdk[x][y] = rowN[iRow]
-
-                            if colN[iCol] == sqN[iSq]:
-                                Sdk[x][y] == sqN[iSq]
+                nums[y][x] = getEMN(x, y)
+    return nums
 
 
+def setNums():
+    nums = checkEN()
+    for y in range(9):
+        for x in range(9):
+            if len(nums[y][x]) == 1 and nums[y][x][0] != 0:
+                n = nums[y][x][0]
+                Sdk[y][x] = n
 
+def solveSudoku():
+    solved = False
+    while not solved:
+        setNums()
+        for y in range(9):
+            for x in range(9):
+                if Sdk[y][x] == 0:
+                    solved = False
+                    break
+                elif x == 8 and y == 8 and Sdk[y][x] != 0:
+                    solved = True
 
+def my_mainloop():
+    solveSudoku()
 
-nums()
-# backtrack()
+    draw()
 
-print(whiteSp)
-
-# def my_mainloop():
-draw()
-
-# master.after(40, my_mainloop)
+master.after(40, my_mainloop)
 master.mainloop()
 
 # TODO resolve the x y / y x  problem
