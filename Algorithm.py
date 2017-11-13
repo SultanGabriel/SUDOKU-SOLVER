@@ -66,7 +66,7 @@ def solveSudoku():
         for y in range(9):
             for x in range(9):
                 solved = True
-                if v.Sdk[y][x] == 0: #and v.OSdk[y][x] != v.Sdk[y][x]:
+                if v.Sdk[y][x] == 0:  # and v.OSdk[y][x] != v.Sdk[y][x]:
                     solved = False
                     br = True
                     break
