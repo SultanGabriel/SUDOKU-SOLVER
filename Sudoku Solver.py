@@ -33,6 +33,7 @@ def draw():
     drawGrid()
     drawNum()
 
+
 def checkRow(n, _x, y):
     for x in range(9):
         if n == Sdk[y][x] and x != _x:
@@ -75,12 +76,15 @@ def nums():
                     Sdk[y][x] = n
                     break
 
+
 whiteSp = []
+
+
 def backtrack():
     for y in range(9):
         for x in range(9):
             if Sdk[y][x] == 0:
-                whiteSp.append((y,x))
+                whiteSp.append((y, x))
                 c.create_oval(x * 50 + 2, y * 50 + 2, x * 50 + 48, y * 50 + 48)
 
     while len(whiteSp) != 0:
@@ -102,22 +106,32 @@ def backtrack():
                     sqN.append(n)
 
             while True:
-                iRow = 0
-                iCol = 0
-                iSq = 0
+                #iRow = 0
+                #iCol = 0
+                #iSq = 0
 
-                # TODO find a way to itterate through all possible combinations
+                # TODO find a way to iterate through all possible combinations
+                for iRow in len(rowN):
+                    for iCol in len(colN):
+                        for iSq in len(sqN):
 
-                if rowN[iRow] == colN[iCol] and colN[iCol] == sqN[iSq]:
-                    Sdk[x][y] = n
+                            if rowN[iRow] == colN[iCol] and colN[iCol] == sqN[iSq]:
+                                Sdk[x][y] = rowN[iRow]
+                                break
+
+                            if rowN[iRow] == colN[iCol]:
+                                Sdk[x][y] = rowN[iRow]
+
+                            if colN[iCol] == sqN[iSq]:
+                                Sdk[x][y] == sqN[iSq]
 
 
-                break
 
 
 
 nums()
-backtrack()
+# backtrack()
+
 print(whiteSp)
 
 # def my_mainloop():
@@ -126,8 +140,7 @@ draw()
 # master.after(40, my_mainloop)
 master.mainloop()
 
-#TODO resolve the x y / y x  problem
-#TODO add a better mode to change the numbers
-#TODO add some button or thing to solve the sudoku
-#TODO add a menu !
-
+# TODO resolve the x y / y x  problem
+# TODO add a better mode to change the numbers
+# TODO add some button or thing to solve the sudoku
+# TODO add a menu !
