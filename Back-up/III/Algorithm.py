@@ -1,17 +1,14 @@
 import vars as v
-from copy import deepcopy
-
-sdk = [[]]
 
 def checkRow(n, _x, y):
     for x in range(9):
-        if n == sdk[y][x] and x != _x:
+        if n == v.Sdk[y][x] and x != _x:
             return False
     return True
 
 def checkCol(n, x, _y):
     for y in range(9):
-        if n == sdk[y][x] and y != _y:
+        if n == v.Sdk[y][x] and y != _y:
             return False
     return True
 
@@ -25,7 +22,7 @@ def checkSq(n, x, y):
 
     for y in range(minY, maxY):
         for x in range(minX, maxX):
-            if n == sdk[y][x]:
+            if n == v.Sdk[y][x]:
                 return False
     return True
 
@@ -48,7 +45,7 @@ def checkEN():
     nums = [[[0] for j in range(9)] for i in range(9)]
     for y in range(9):
         for x in range(9):
-            if sdk[y][x] == 0:
+            if v.Sdk[y][x] == 0:
                 nums[y][x] = getEMN(x, y)
     return nums
 
@@ -59,13 +56,9 @@ def setNums():
         for x in range(9):
             if len(nums[y][x]) == 1 and nums[y][x][0] != 0:
                 n = nums[y][x][0]
-                sdk[y][x] = n
+                v.Sdk[y][x] = n
 
-
-def solveSudoku(OSdk):
-    global sdk
-    sdk = deepcopy(OSdk)
-
+def solveSudoku():
     solved = False
     while not solved:
         setNums()
@@ -73,11 +66,12 @@ def solveSudoku(OSdk):
         for y in range(9):
             for x in range(9):
                 solved = True
-                if sdk[y][x] == 0:  # and v.OSdk[y][x] != sdk[y][x]:
+                if v.Sdk[y][x] == 0:  # and v.OSdk[y][x] != v.Sdk[y][x]:
                     solved = False
                     br = True
                     break
             if br:
                 break
 
-    return sdk
+        print(solved)
+

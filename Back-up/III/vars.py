@@ -1,9 +1,6 @@
-WINDOW_WIDTH = 550
-WINDOW_HEIGHT = 450
-
-GRID_WIDTH = 450
-GRID_HEIGHT = 450
-
+from copy import deepcopy
+WIDTH = 450
+HEIGHT = 450
 
 OSdk = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
         [6, 0, 0, 1, 9, 5, 0, 0, 0],
@@ -29,6 +26,6 @@ Sdk = [[0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 0],
        [0, 0, 0, 0, 0, 0, 0, 0, 0]]
 
-#def init():
- #   global Sdk
-
+def init():
+    global Sdk
+    Sdk = deepcopy(OSdk)
