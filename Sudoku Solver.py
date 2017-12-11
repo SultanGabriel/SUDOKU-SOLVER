@@ -12,10 +12,10 @@ class Number:
     x = 0
     y = 0
 
-    def __init__(self, n, x, y):
-        self.n = n
-        self.x = x
-        self.y = y
+    def __init__(self, n_, x_, y_):
+        self.n = n_
+        self.x = x_
+        self.y = y_
 
 def drawGrid():
     for i in range(8):
@@ -24,7 +24,6 @@ def drawGrid():
             w = 3
         c.create_line(0, (i + 1) * 50, v.GRID_WIDTH, (i + 1) * 50, fill="black", width=w)
         c.create_line((i + 1) * 50, 0, (i + 1) * 50, v.GRID_HEIGHT, fill="black", width=w)
-
 
     c.create_line(v.GRID_WIDTH, 0, v.GRID_WIDTH, v.GRID_HEIGHT, fill="black", width=3)
     c.create_line(3, 0, 3, v.GRID_HEIGHT, fill="black", width=3)
@@ -35,11 +34,11 @@ def createNums():
     for y in range(9):
         for x in range(9):
             v.Sdk[y][x] = Number(v.OSdk[y][x], x * 50 + 25, y * 50 + 25)
-            print(v.Sdk[y][x].n)
+            #print(v.Sdk[y][x].n)
 
 
 
-def drawNums():
+def drawNums(num,x,y):
     for y in range(9):
         for x in range(9):
             if v.Sdk[y][x].n != 0:
@@ -57,11 +56,12 @@ createNums()
 def draw():
     c.delete("all")
     drawGrid()
-    drawNums()
+    #drawNums()
 
 def my_mainloop():
     print(v.Sdk[0][0].n)
     v.Sdk = solveSudoku(v.OSdk)
+    print(v.Sdk[0][0].n)
     draw()
 
 master.after(40, my_mainloop)

@@ -4,3 +4,7 @@ __pycache__/
 
 Sudoku_Solver PROCESSING/
 
+.vs/ProjectSettings.json
+.vs/VSWorkspaceState.json
+.vs/slnx.sqlite
+.vs/SUDOKU-SOLVER/v15/.suo
